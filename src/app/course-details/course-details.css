@@ -1,0 +1,32 @@
+   :root{
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --accent: #2755b0;
+      --muted: #6b7280;
+      --shadow: 0 8px 20px rgba(39,85,176,0.07);
+      --radius: 12px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;color:#111;background:var(--bg)}
+    .container{max-width:980px;margin:36px auto;padding:20px}
+    h1{margin:0 0 18px;color:var(--accent);font-size:24px}
+    p.lead{margin:0 0 20px;color:var(--muted)}
+    /* Course card (stacked) */
+    .course{display:flex;gap:18px;align-items:center;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;margin-bottom:16px}
+    .course__img{flex:0 0 200px;height:120px;border-radius:10px;overflow:hidden;background:#eee}
+    .course__img img{width:100%;height:100%;object-fit:cover;display:block}
+    .course__body{flex:1;min-width:0}
+    .course__title{font-size:18px;margin:0 0 6px;color:#0b1b3a}
+    .course__meta{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:14px;margin-bottom:8px}
+    .badge{background:#f1f6ff;color:var(--accent);padding:6px 8px;border-radius:8px;font-weight:600;font-size:13px}
+    .price{font-weight:800;color:#0b1b3a;font-size:16px}
+    .stats{display:flex;gap:14px;align-items:center;color:var(--muted);font-size:14px}
+    .rating{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:#0b1b3a}
+    .stars{color:#f6b12c;font-size:14px}
+    .students{display:inline-flex;align-items:center;gap:6px}
+    /* small screens */
+    @media (max-width:700px){
+      .course{flex-direction:column;align-items:flex-start}
+      .course__img{width:100%;height:180px}
+      .course__meta{flex-direction:column;align-items:flex-start;gap:6px}
+    }

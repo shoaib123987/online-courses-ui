@@ -1,0 +1,86 @@
+<div class="layout">
+    <aside class="sidebar">
+      <div class="brand">Admin Dashboard</div>
+      <div class="profile">
+        <div class="avatar">A</div>
+        <div>
+          <h4>Admin</h4>
+          <p>superuser@example.com</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a routerLink="/upload-courses">📁 Upload Courses</a>
+        <a routerLink="/upload-course-details">📦 Upload Products</a>
+        <a routerLink="/admin/upload-reports">📊 Upload Reports</a>
+      </nav>
+
+      <div style="margin-top:28px;font-size:13px;opacity:0.95">Quick actions</div>
+    </aside>
+
+    <!-- <main class="main">
+      <div class="header">
+        <h2>Upload Center</h2>
+        <div style="font-size:14px;color:var(--muted)">Choose a panel from the left to upload data</div>
+      </div>
+
+      <section class="card" id="panel-users">
+        <h3>Upload Users (CSV)</h3>
+        <div class="note">CSV expected columns: first_name, last_name, email, role</div>
+        <div class="upload-forms">
+          <div class="form-block">
+            <form id="form-users">
+              <label for="file-users">Select CSV file</label>
+              <input id="file-users" name="file" type="file" accept=".csv" required />
+              <button class="btn" type="submit">Upload Users</button>
+            </form>
+            <div id="res-users" class="note"></div>
+          </div>
+
+          <div class="form-block">
+            <label>Preview (first 5 rows)</label>
+            <div id="preview-users" class="note">No file selected</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="panel-products" style="display:none;margin-top:18px">
+        <h3>Upload Products (JSON / CSV)</h3>
+        <div class="note">JSON array or CSV with columns: name,price,stock,category</div>
+        <div class="upload-forms">
+          <div class="form-block">
+            <form id="form-products">
+              <label for="file-products">Select file</label>
+              <input id="file-products" name="file" type="file" accept=".json,.csv" required />
+              <button class="btn" type="submit">Upload Products</button>
+            </form>
+            <div id="res-products" class="note"></div>
+          </div>
+          <div class="form-block">
+            <label>Preview</label>
+            <div id="preview-products" class="note">No file selected</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="panel-reports" style="display:none;margin-top:18px">
+        <h3>Upload Reports (PDF / XLSX)</h3>
+        <div class="note">Attach supporting reports or spreadsheets</div>
+        <div class="upload-forms">
+          <div class="form-block">
+            <form id="form-reports">
+              <label for="file-reports">Select file</label>
+              <input id="file-reports" name="file" type="file" accept=".pdf,.xlsx,.xls" required />
+              <button class="btn" type="submit">Upload Report</button>
+            </form>
+            <div id="res-reports" class="note"></div>
+          </div>
+          <div class="form-block">
+            <label>Info</label>
+            <div class="note">Uploaded files are not actually sent anywhere in this demo. Hook the form to your backend endpoint (e.g., /api/upload) and POST FormData.</div>
+          </div>
+        </div>
+      </section>
+
+    </main> -->
+  </div>

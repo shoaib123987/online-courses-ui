@@ -1,0 +1,24 @@
+<main class="container">
+  <h1>Available Courses</h1>
+  <p class="lead">Choose from developer-focused courses — image, duration, students, rating and price shown below.</p>
+
+  <article class="course" *ngFor="let course of filteredCourses">
+    <div class="course__img">
+      <img [src]="dataService.imageUrl + course.courseImg" alt="{{ course.subjects }}">
+    </div>
+    <div class="course__body">
+      <h2 class="course__title">{{ course.subjects }}</h2>
+      <div class="course__meta">
+        <span class="badge">{{ course.duration }}</span>
+        <span class="badge">Beginner → Intermediate</span>
+        <span class="price">{{ course.price }}</span>
+      </div>
+      <div class="stats">
+        <div class="students">👥 35 Students</div>
+        <div class="rating">
+          <span class="stars">★★★★☆</span>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>

@@ -1,0 +1,61 @@
+<div class="wrap">
+  <div class="card">
+    <h1>Course Details</h1>
+    <p class="lead">Fill in the details for the selected course</p>
+
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+
+  <select id="course-select" name="esId" [(ngModel)]="courseData.esId" required>
+  <option value="">--Select Course--</option>
+  <option *ngFor="let course of subject" [value]="course.esId">
+    {{ course.cName }}
+  </option>
+</select>
+
+
+
+      <!-- Course Image -->
+      <div class="field">
+        <label for="course_img">Course Image</label>
+        <input id="course_img" name="course_img" type="file" accept="image/*" (change)="onFileSelected($event)" required />
+      </div>
+
+      <!-- Duration -->
+      <div class="field">
+        <label for="duration">Duration</label>
+        <input id="duration" name="duration" type="text" placeholder="e.g. 3 Months"
+               [(ngModel)]="courseData.duration" required />
+      </div>
+
+      <!-- Price -->
+      <div class="field">
+        <label for="price">Price</label>
+        <input id="price" name="price" type="text" placeholder="e.g. 5000"
+               [(ngModel)]="courseData.price" required />
+      </div>
+
+      <!-- Popular -->
+      <div class="field">
+        <label for="popular">Popular</label>
+        <select id="popular" name="popular" [(ngModel)]="courseData.popular" required>
+          <option value="">--Select--</option>
+          <option value="Popular">Popular</option>
+          <option value="Not Popular">Not Popular</option>
+        </select>
+      </div>
+
+      <!-- Subjects -->
+      <div class="field">
+        <label for="subjects">Subjects</label>
+        <input id="subjects" name="subjects" type="text" placeholder="e.g. Math, Science"
+               [(ngModel)]="courseData.subjects" required />
+      </div>
+
+      <!-- Buttons -->
+      <div class="row">
+        <button class="btn" type="submit" [disabled]="!registerForm.valid">Save Course</button>
+        <button class="btn secondary" type="reset">Reset</button>
+      </div>
+    </form>
+  </div>
+</div>

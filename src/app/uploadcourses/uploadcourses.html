@@ -1,0 +1,38 @@
+ <div class="wrap">
+    <div class="card">
+      <h1>Upload Courses</h1>
+      <p class="lead">Add a course name and upload a thumbnail image. (Demo: HTML + CSS only)</p>
+
+      <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+        <div class="field">
+          <label for="course-name">Course Name</label>
+          <input
+        type="text"
+        class="form-control"
+        id="cName"
+        name="cName"
+        [(ngModel)]="courseData.cName"
+        required
+      />
+        </div>
+
+        <div class="field">
+          <label for="course-image">Course Image (jpg, png)</label>
+         <input
+    type="file"
+    class="form-control"
+    id="img"
+    name="img"
+    (change)="onFileSelected($event)"
+    required
+  />
+          <div class="note">Max 2MB. No preview in this demo (HTML/CSS only).</div>
+        </div>
+
+        <div class="row">
+          <button class="btn" type="submit">Upload Course</button>
+          <button class="btn secondary" type="reset">Reset</button>
+        </div>
+      </form>
+    </div>
+  </div>

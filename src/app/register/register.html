@@ -1,0 +1,96 @@
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Register</h2>
+  <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+    
+<div class="form-group mb-3">
+  <label for="img">Profile Image</label>
+  <input
+    type="file"
+    class="form-control"
+    id="img"
+    name="img"
+    (change)="onFileSelected($event)"
+    required
+  />
+</div>
+
+
+
+    <!-- Name -->
+    <div class="form-group mb-3">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        [(ngModel)]="registerData.name"
+        required
+      />
+    </div>
+
+    <!-- Email -->
+    <div class="form-group mb-3">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        [(ngModel)]="registerData.email"
+        required
+      />
+    </div>
+
+    <!-- Password -->
+    <div class="form-group mb-3">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        [(ngModel)]="registerData.password"
+        required
+      />
+    </div>
+
+    <!-- City -->
+    <div class="form-group mb-3">
+      <label for="city">City</label>
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        name="city"
+        [(ngModel)]="registerData.city"
+        required
+      />
+    </div>
+
+   <!-- Qualification -->
+<div class="form-group mb-4">
+  <label for="qualification">Qualification</label>
+  <select
+    class="form-control"
+    id="qualification"
+    name="qualification"
+    [(ngModel)]="registerData.qualification"
+    required
+  >
+    <option value="" disabled selected>Select Qualification</option>
+    <option value="Student">Student</option>
+    <option value="Graduate">Graduate</option>
+  </select>
+</div>
+
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary w-100">Register</button>
+  </form>
+</div>
+
+<div>
+    <a routerLink="/login">Already registered?</a>
+</div>
+
