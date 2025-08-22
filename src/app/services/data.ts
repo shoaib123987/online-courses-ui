@@ -6,7 +6,7 @@ import { Observable } from 'rxjs'; // Observable return karne ke liye (async dat
 @Injectable({
   providedIn: 'root'
 })
-export class Data {
+export class Data { 
 
   constructor(private http: HttpClient) { }
    public currentUser: any = null;
@@ -50,5 +50,19 @@ setSubject(data: any): Observable<any> {
 getCourses(): Observable<any> {
     return this.http.get('https://localhost:7145/api/Home/acCourses'); // Courses data fetch karne ke liye
   }
+
+
+setCourseVideo(data: any): Observable<any> {
+    return this.http.post('https://localhost:7145/api/Home/coursevedio', data); // Course video data post karne ke liye
+  } 
+
+  getCourseVideo(): Observable<any> {
+    return this.http.get('https://localhost:7145/api/Home/coursevedio'); // Course video data fetch karne ke liye
+  }
+
+getCourseVideoByCourseId(courseId: number): Observable<any> {
+  return this.http.get(`https://localhost:7145/api/Home/coursevedio/${courseId}`);
+}
+
 
 }

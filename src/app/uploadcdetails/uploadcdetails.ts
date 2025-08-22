@@ -78,6 +78,8 @@ constructor(public dataService: Data, private router: Router) {
       console.log('Course uploaded successfully', response);
       this.router.navigate(['/home']);
     },
+
+    
     error => {
       console.error('Course upload failed', error);
     }

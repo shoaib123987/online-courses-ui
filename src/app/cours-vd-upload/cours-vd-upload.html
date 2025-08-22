@@ -1,0 +1,40 @@
+<section class="course-video-form">
+  <h2 class="form-title">Add Course Video</h2>
+
+  <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+    <!-- Dropdown for parent course -->
+     <div class="form-group">
+      <label for="course">Select Course:</label>
+
+      <select id="course-select" name="id" [(ngModel)]="courseData.id" required>
+        <option value="">--Select Course--</option>
+        <option *ngFor="let c of course" [value]="c.id">
+          {{ c.subjects }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Video Upload -->
+    <div class="form-group">
+      <label for="video">Upload Video:</label>
+      <input type="file" id="ved" name="ved" (change)="onFileSelected($event)" accept="video/*" required>
+    </div>
+
+    <!-- Heading -->
+    <div class="form-group">
+      <label for="heading">Heading:</label>
+      <input type="text" id="heading" [(ngModel)]="courseData.heading" name="heading" placeholder="Enter video heading" required>
+    </div>
+
+    <!-- Title -->
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" id="title" [(ngModel)]="courseData.title" name="title" placeholder="Enter video title" required>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+      <button type="submit" class="submit-btn">Submit</button>
+    </div>
+  </form>
+</section>

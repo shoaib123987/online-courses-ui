@@ -3,11 +3,23 @@
   <p class="lead">Choose from developer-focused courses — image, duration, students, rating and price shown below.</p>
 
   <article class="course" *ngFor="let course of filteredCourses">
+ 
+    <!-- <a class="cat-overlay text-white text-decoration-none" [routerLink]="['/course-vd-list',vd_list.cvId]"> -->
+      
+
+       
     <div class="course__img">
+
+     <a [routerLink]="['/course-vd-list', course.id]">
       <img [src]="dataService.imageUrl + course.courseImg" alt="{{ course.subjects }}">
+      </a>
+     
+
     </div>
     <div class="course__body">
+    
       <h2 class="course__title">{{ course.subjects }}</h2>
+         
       <div class="course__meta">
         <span class="badge">{{ course.duration }}</span>
         <span class="badge">Beginner → Intermediate</span>
@@ -20,5 +32,6 @@
         </div>
       </div>
     </div>
+
   </article>
 </main>
