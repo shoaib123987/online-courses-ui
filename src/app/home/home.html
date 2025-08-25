@@ -8,7 +8,7 @@
             </ol>
             <div class="carousel-inner">
 
-                <div *ngFor="let data of courses">
+                <div *ngFor="let data of carousel">
                 <div class="carousel-item active" style="min-height: 300px;">
                     <img class="position-relative w-100" [src]="dataService.imageUrl + data.image" style="min-height: 300px; object-fit: cover;">
                     <div class="carousel-caption d-flex align-items-center justify-content-center">
@@ -176,7 +176,7 @@
                                 <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>25 Students</small>
                                 <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>{{ course.duration }}</small>
                             </div>
-                            <a class="h5" href="">{{ course.subjects }}</a>
+                            <a class="h5" [routerLink]="['/course-vd-list', course.id]">{{ course.subjects }}</a>
                             <div class="border-top mt-4 pt-4">
                                 <div class="d-flex justify-content-between">
                                     <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>4.5 <small>(250)</small></h6>

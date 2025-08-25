@@ -16,6 +16,7 @@ export class CourseDetails implements OnInit {
   courses: any[] = [];
   filteredCourses: any[] = [];
    vd_list: any[] = [];
+   subject: any = {};
 
   constructor(private route: ActivatedRoute,public dataService: Data // public kiya taki HTML me access ho sake
   ) {
@@ -25,7 +26,7 @@ export class CourseDetails implements OnInit {
     });
 
 
-
+   
 
   }
 
@@ -41,9 +42,18 @@ export class CourseDetails implements OnInit {
       // Filter lagana jiska esId match kare
       this.filteredCourses = this.courses.filter(c => c.esId === esId);
       console.log("Filtered:", this.filteredCourses);
+
+
+    });
+
+
+
+
+    this.dataService.getSubject().subscribe((subjects: any[]) => {
+      const subj = subjects.find(s => s.esId === this.filteredCourses[0]?.esId);
+      this.subject = subj || {};
     });
   }
-
 
 
 

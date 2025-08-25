@@ -1,36 +1,48 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Data } from '../services/data'; // Importing the Data service to access currentUser
-import { Router } from '@angular/router'; // Importing Router for navigation
+import { RouterModule, Router } from '@angular/router';
+import { Data } from '../services/data';
+import { CommonModule } from '@angular/common';
+import { Observable, firstValueFrom } from 'rxjs';
+
 @Component({
   selector: 'app-header',
-  imports: [RouterModule],
   standalone: true,
+  imports: [RouterModule, CommonModule],
   templateUrl: './header.html',
-  styleUrl: './header.css'
+  styleUrls: ['./header.css']
 })
 export class Header {
-
-  constructor(public dataService: Data, private router: Router) {} // Injecting the Data service to access currentUser
-
-  // You can add more methods or properties if needed
-
   dropdownOpen = false;
+  user$: Observable<any>;
 
-toggleDropdown() {
-  this.dropdownOpen = !this.dropdownOpen;
-}
+  constructor(public dataService: Data, private router: Router) {
+    this.user$ = this.dataService.currentUser$;
+  }
 
-closeDropdown() {
-  this.dropdownOpen = false;
-}
+  // ---------------- Dropdown ----------------
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
 
-logout() {
-  localStorage.removeItem('user'); // or clear your login token
-  this.closeDropdown();
-  this.router.navigate(['/home']);
-}
+  closeDropdown() {
+    this.dropdownOpen = false;
+  }
 
+  // ---------------- Logout ----------------
+  logout() {
+    this.dataService.logout();
+    this.closeDropdown();
+    this.router.navigate(['/home']);
+  }
 
-
+  // ---------------- Dashboard Redirect ----------------
+  async goToDashboard() {
+    const user = await firstValueFrom(this.dataService.currentUser$);
+    if (user) {
+      // ✅ Navigate to dashboard and pass userId via state
+      this.router.navigate(['/user_db'], { state: { userId: user.id } });
+    } else {
+      this.router.navigate(['/home']);
+    }
+  }
 }

@@ -1,0 +1,65 @@
+<div *ngIf="isLoggedIn; else notLogged">
+  <h1 style="
+      color: #FF6600; 
+      background-color: white; 
+      padding: 20px 40px; 
+      border-radius: 15px; 
+      text-align: center; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+      width: fit-content; 
+      margin: 50px auto;
+  ">
+    Welcome to Your Dashboard
+  </h1>
+
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2 class="logo">My Courses</h2>
+      <ul>
+        <li><a href="#">📚 Purchased Courses</a></li>
+        <li><a href="#">⭐ Wishlist</a></li>
+        <li><a href="#">⚙️ Settings</a></li>
+        <li><a href="#">🚪 Logout</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h2 class="sub-title">📚 Your Purchased Courses</h2>
+
+      <div *ngIf="purchases.length > 0; else noCourse" class="courses-grid">
+        <div *ngFor="let course of purchases" class="course-card">
+          <img 
+            [src]="dataService.imageUrl + course.courseImg" 
+            [alt]="course.subjects" 
+            class="course-img"
+          />
+
+          <div class="course-details">
+            <h3>{{ course.subjects }}</h3>
+            <p>Duration: {{ course.duration }}</p>
+            <p>Price: {{ course.price }}</p>
+            <span class="badge" *ngIf="course.popular">{{ course.popular }}</span>
+          </div>
+
+            <a [routerLink]="['/course-vd-list', course.id]">
+              <button class="continue-btn">▶ Continue</button>
+            </a>
+        </div>
+      </div>
+
+      <ng-template #noCourse>
+        <p style="text-align:center; margin-top:20px; color: gray;">
+          You haven't purchased any courses yet.
+        </p>
+      </ng-template>
+    </main>
+  </div>
+</div>
+
+<ng-template #notLogged>
+  <h2 style="color: #FF6600; text-align:center; margin-top:50px;">
+    Please login to access dashboard
+  </h2>
+</ng-template>

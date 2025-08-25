@@ -93,16 +93,47 @@
                                     <a href="single.html" class="dropdown-item">Blog Detail</a>
                                 </div>
                             </div>
-                            <a routerLink="/contact" class="nav-item nav-link">Contact</a>
+                            <a (click)="goToDashboard()" class="nav-item nav-link">User Dashboard</a>
                         </div>
-                       
-                            
-                            <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" routerLink="/register">Login/SignUp</a>
-                       
+<div class="d-flex align-items-center gap-2 p-1 rounded-pill border"
+     (click)="toggleDropdown()" 
+     style="background-color: #FF6600; color: white; cursor: pointer; position: relative;">
 
-                        <ng-container *ngIf="dataService.currentUser">
-                            <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" (click)="logout()">Logout</a>    
-                        </ng-container>
+  <ng-container *ngIf="(user$ | async) as user; else guest">
+    <img [src]="dataService.imageUrl + (user.profileimg || 'default.jpg')" 
+         alt="Profile" 
+         class="rounded-circle" 
+         width="32" 
+         height="32"
+         style="border: 2px solid white;" />
+    <span class="fw-bold">{{ user.name || 'User' }}</span>
+  </ng-container>
+
+  <!-- 👇 Ye dropdown hamesha render hoga -->
+  <div *ngIf="dropdownOpen"
+       style="position:absolute; top: 100%; left: 0; background-color: white; color: black; border-radius: 5px; margin-top: 5px; min-width: 150px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 1000;">
+    <a routerLink="/profile" style="display:block; padding:8px 12px; text-decoration:none; color:black; border-bottom: 1px solid #eee;">Profile</a>
+    <a routerLink="/dashboard" style="display:block; padding:8px 12px; text-decoration:none; color:black; border-bottom: 1px solid #eee;">Dashboard</a>
+    <a (click)="logout()" style="display:block; padding:8px 12px; text-decoration:none; color:black; cursor:pointer;">
+      Logout
+    </a>
+  </div>
+</div>
+
+
+
+ <!-- <button class="dropdown-item" 
+              (click)="logout()" 
+              style="background-color: transparent; color: white; border: none; width: 100%; text-align: center; padding: 5px 10px;">
+        Logout
+      </button> -->
+
+
+
+<ng-template #guest>
+  <a style="background-color: transparent; color: white; border: none; width: 100%; text-align: center; padding: 5px 10px;" routerLink="/register">Login/SignUp</a>
+</ng-template>
+
                   
 
 

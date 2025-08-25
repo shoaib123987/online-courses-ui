@@ -9,11 +9,11 @@ import { Data } from '../services/data';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css'
+  styleUrls: ['./login.css']
 })
 export class Login {
 
-  constructor(private dataService: Data, private router: Router) {}
+  constructor(public dataService: Data, private router: Router) {}
 
   loginData = {
     email: '',
@@ -23,9 +23,12 @@ export class Login {
   onLogin() {
     this.dataService.loginUser(this.loginData).subscribe(
       response => {
-        this.dataService.currentUser = response.user;
-        console.log('Login successful', response);
-        this.router.navigate(['/home']); // ya jis page pe le jaana hai
+        if(response && response.user) {
+          this.dataService.setLogin(true);
+          this.dataService.setUser(response.user);
+          console.log('Login successful', response);
+          this.router.navigate(['/home']);
+        }
       },
       error => {
         console.error('Login failed', error);

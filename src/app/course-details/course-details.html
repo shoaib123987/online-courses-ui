@@ -1,6 +1,17 @@
 <main class="container">
-  <h1>Available Courses</h1>
-  <p class="lead">Choose from developer-focused courses — image, duration, students, rating and price shown below.</p>
+ <h1 style="
+    text-align: center; 
+    color: #FF6600; 
+    font-family: 'Arial', sans-serif; 
+    font-size: 2.5rem; 
+    font-weight: bold; 
+    margin: 20px 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+">
+  {{ subject.cName }}
+</h1>
+
+  <!-- <p class="lead">Choose from developer-focused courses — image, duration, students, rating and price shown below.</p> -->
 
   <article class="course" *ngFor="let course of filteredCourses">
  

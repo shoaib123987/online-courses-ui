@@ -14,6 +14,7 @@ import { CourseDemo } from './course-demo/course-demo';
 import { CoursVdUpload } from './cours-vd-upload/cours-vd-upload';
 
 import { CouservedioListdemo } from './couservedio-listdemo/couservedio-listdemo';
+import { UserDashboard } from './user-dashboard/user-dashboard';
 
 
 export const routes: Routes = [
@@ -32,4 +33,5 @@ export const routes: Routes = [
                 { path: 'course-demo/:id', component: CourseDemo},
                    { path: 'course-vd-upload', component: CoursVdUpload},
                      { path: 'course-vd-list/:id', component: CouservedioListdemo},
+                     { path: 'user_db', component: UserDashboard},
 ];

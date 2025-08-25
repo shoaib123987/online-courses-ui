@@ -1,20 +1,37 @@
 <div class="container" *ngFor="let video of vd_list; let i = index">
-  <!-- Left Video -->
   <div class="video-section">
     <video 
       controls 
       poster="https://via.placeholder.com/800x450.png?text=Course+Video"
       (loadedmetadata)="setDuration($event, i)">
-      
       <source [src]="dataService.imageUrl + video.videoPath" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
 
-  <!-- Right Content -->
   <div class="content-section">
     <h2>{{ video.heading }}</h2>
     <p>{{ video.title }}</p>
     <span class="duration">⏱ Duration: {{ video.duration }}</span>
   </div>
+</div>
+
+<div style="text-align: center; margin-top: 30px;">
+  <button
+    (click)="buyCourse()"  
+    style="
+      background-color: #FF6600;
+      color: white;
+      padding: 15px 30px;
+      font-weight: bold;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: 0.3s;
+    "
+    (mouseover)="hover = true"
+    (mouseout)="hover = false"
+  >
+    Buy Now
+  </button>
 </div>
