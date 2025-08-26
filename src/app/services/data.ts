@@ -108,13 +108,13 @@ export class Data {
     return this.http.put<Purchase>(`${this.apiUrl}/Home/update-status/${purchaseId}`, { status });
   }
 
-  getUserPurchases(userId: number): Observable<Purchase[]> {
-    return this.http.get<Purchase[]>(`${this.apiUrl}/Home/user/${userId}`);
-  }
+  // getUserPurchases(userId: number): Observable<Purchase[]> {
+  //   return this.http.get<Purchase[]>(`${this.apiUrl}/Home/user/${userId}`);
+  // }
 
-  getAllPurchases(): Observable<Purchase[]> {
-    return this.http.get<Purchase[]>(`${this.apiUrl}/Home/purchase`);
-  }
+  // getAllPurchases(): Observable<Purchase[]> {
+  //   return this.http.get<Purchase[]>(`${this.apiUrl}/Home/purchase`);
+  // }
 
   // ------------------ Auth Handling ------------------
   setLogin(status: boolean) {

@@ -17,7 +17,7 @@ export class CouservedioListdemo implements OnInit {
   courseId!: number;
   hover = false;
 
- courses: any[] = [];
+  courses: any[] = [];
   filteredCourses: any[] = [];
 
   constructor(
@@ -27,32 +27,20 @@ export class CouservedioListdemo implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // URL se courseId lena
     this.courseId = Number(this.route.snapshot.paramMap.get('id'));
     console.log("Course ID from URL:", this.courseId);
 
-    // Load course videos
     this.dataService.getCourseVideoByCourseId(this.courseId).subscribe((data: any) => {
       this.vd_list = data;
       console.log("Videos loaded:", this.vd_list);
     });
 
-    // Load all courses
-   
-  // URL se esId lena
     const esId = Number(this.route.snapshot.paramMap.get('id'));
-
-    // Courses data fetch karna
     this.dataService.getCourses().subscribe((data: any[]) => {
       this.courses = data;
-      // Filter lagana jiska esId match kare
       this.filteredCourses = this.courses.filter(c => c.id === esId);
       console.log("Filtered:", this.filteredCourses);
-
-
     });
-
-
   }
 
   setDuration(event: Event, index: number) {
@@ -66,102 +54,76 @@ export class CouservedioListdemo implements OnInit {
 
   buyCourse() {
     console.log("Buy button clicked!");
-
     this.dataService.currentUser$.pipe(take(1)).subscribe((user: User | null) => {
-      console.log("Current user inside buyCourse:", user);
-
       if (!user) {
         alert('Please login first.');
         this.router.navigate(['/login']);
         return;
       }
 
-      // Check if course loaded
       if (!this.filteredCourses.length) {
         alert('Course not loaded or not found.');
         return;
       }
 
-      // Use the filtered course
       const course = this.filteredCourses[0];
       this.startPayment(user, course);
     });
   }
 
- startPayment(user: User, course: any) {
-  const amount = Number(course.price.toString().replace(/[^0-9.-]+/g,""));
-  if (isNaN(amount) || amount <= 0) {
-    alert('Invalid course price.');
-    return;
-  }
+  startPayment(user: User, course: any) {
+    const amount = Number(course.price.toString().replace(/[^0-9.-]+/g,""));
+    if (isNaN(amount) || amount <= 0) {
+      alert('Invalid course price.');
+      return;
+    }
 
-  const purchase = {
-  purchaseId: 0,
-  userId: user.id,
- CnameId: course.id,
-  courseId: course.id, 
-  amount: amount,
-  status: 'Pending',
-  transactionId: "",
-  purchaseDate: new Date().toISOString(),
-  user: {
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    profileimg: user.profileimg,
-    password: "",
-    city: "",
-    qualification: "",
-    purchases: []
-  },
-  course: {
-    id: course.id,
-    esId: course.esId,
-    courseImg: course.courseImg,
-    duration: course.duration,
-    price: course.price,
-    popular: course.popular,
-    subjects: course.subjects,
-    courseVideos: course.videos || [],
-    es: {},
-    purchases: []
-  }
-};
-
-
-  console.log("Creating order: ", purchase);
-
-  // Correct endpoint
-  this.dataService.createOrder(purchase).subscribe({
-  next: (res: any) => {
-    console.log("Order response:", res);
-
-    const options: any = {
-      key: 'rzp_test_R981BYlbaAJaFm',
-      amount: Number(res.amount),   // paise me
-      
-      currency: 'INR',
-      name: 'Online Course',
-      description: 'Course Purchase',
-      order_id: res.orderId,     // backend se aaya orderId
-      handler: (response: any) => {
-        console.log("Payment success:", response);
-
-        // ✅ Payment hone ke baad backend ko status update karo
-        this.dataService.updatePurchaseStatus(res.purchaseId, 'Paid').subscribe();
-      },
-      prefill: { name: user.name, email: user.email },
-      theme: { color: '#FF6600' }
+    const purchase = {
+      purchaseId: 0,
+      userId: user.id,
+      CnameId: course.id,
+      courseId: course.id, 
+      amount: amount,
+      status: 'Pending'
     };
 
-    const rzp = new (window as any).Razorpay(options);
-    rzp.open();
-  },
-  error: (err) => {
-    console.error("Purchase failed:", err);
-    alert('Something went wrong. Try again.');
-  }
-});
-}
+    console.log("Creating order: ", purchase);
 
+    this.dataService.createOrder(purchase).subscribe({
+      next: (res: any) => {
+        console.log("Order response:", res);
+
+        // Razorpay options
+        const options: any = {
+          key: 'rzp_test_R981BYlbaAJaFm',
+          amount: Number(res.amount),   // paise me
+          currency: 'INR',
+          name: 'Online Course',
+          description: 'Course Purchase',
+          order_id: res.orderId,
+          handler: (response: any) => {
+            console.log("Payment success:", response);
+            this.dataService.updatePurchaseStatus(res.purchaseId, 'Paid').subscribe({
+              next: () => alert('Payment successful!'),
+              error: (err) => console.error('Status update failed:', err)
+            });
+          },
+          prefill: { name: user.name, email: user.email },
+          theme: { color: '#FF6600' }
+        };
+
+        const rzp = new (window as any).Razorpay(options);
+        rzp.open();
+      },
+      error: (err) => {
+        console.error("Purchase failed:", err);
+        // Backend se message dikhao
+        if (err.error?.message) {
+          alert(err.error.message); 
+        } else {
+          alert('Something went wrong. Try again.');
+        }
+      }
+    });
+  }
 }
