@@ -39,11 +39,11 @@
           <div class="course-details">
             <h3>{{ course.subjects }}</h3>
             <p>Duration: {{ course.duration }}</p>
-            <p>Price: {{ course.price }}</p>
+            <!-- <p>Price: {{ course.price }}</p> -->
             <span class="badge" *ngIf="course.popular">{{ course.popular }}</span>
           </div>
 
-            <a [routerLink]="['/course-vd-list', course.id]">
+            <a [routerLink]="['/course-axis', course.id]">
               <button class="continue-btn">▶ Continue</button>
             </a>
         </div>

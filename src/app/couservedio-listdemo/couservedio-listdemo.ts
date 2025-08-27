@@ -33,6 +33,8 @@ export class CouservedioListdemo implements OnInit {
     this.dataService.getCourseVideoByCourseId(this.courseId).subscribe((data: any) => {
       this.vd_list = data;
       console.log("Videos loaded:", this.vd_list);
+
+      
     });
 
     const esId = Number(this.route.snapshot.paramMap.get('id'));

@@ -1,0 +1,51 @@
+body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6fa;
+    }
+
+    .page-container {
+      display: flex;
+      max-width: 1200px;
+      margin: 40px auto;
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .video-section {
+  flex: 2;
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-height: 450px;   /* 👈 height control */
+  overflow-y: auto;    /* 👈 scroll agar content jyada ho */
+}
+
+.video-section video {
+  width: 100%;
+  border-radius: 8px;
+  max-height: 400px;   /* 👈 video ki height limit */
+  object-fit: cover;   /* 👈 aspect ratio sahi rahega */
+}
+
+.content-section {
+  flex: 1;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-height: 450px;   /* 👈 height kam kar di */
+  overflow-y: auto;    /* 👈 scroll agar text jyada ho */
+}
+
+    .content-section h3 {
+      margin-top: 0;
+      color: #2755b0;
+    }
+
+    @media (max-width: 900px) {
+      .page-container {
+        flex-direction: column;
+      }
+    }

@@ -1,4 +1,4 @@
-<div class="container" *ngFor="let video of vd_list; let i = index">
+<div class="container" *ngFor="let video of vd_list | slice:0:2;; let i = index">
   <div class="video-section">
     <video 
       controls 

@@ -14,6 +14,9 @@ import { Observable, firstValueFrom } from 'rxjs';
 export class Header {
   dropdownOpen = false;
   user$: Observable<any>;
+   isCollapsed = true; // by default collapse closed
+
+  
 
   constructor(public dataService: Data, private router: Router) {
     this.user$ = this.dataService.currentUser$;
@@ -28,6 +31,9 @@ export class Header {
     this.dropdownOpen = false;
   }
 
+  toggleNavbar() {
+    this.isCollapsed = !this.isCollapsed;
+  }
   // ---------------- Logout ----------------
   logout() {
     this.dataService.logout();

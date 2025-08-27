@@ -15,7 +15,7 @@ import { CoursVdUpload } from './cours-vd-upload/cours-vd-upload';
 
 import { CouservedioListdemo } from './couservedio-listdemo/couservedio-listdemo';
 import { UserDashboard } from './user-dashboard/user-dashboard';
-
+import { CourseAxis } from './course-axis/course-axis';
 
 export const routes: Routes = [
     {path:"", component: Home},
@@ -34,4 +34,5 @@ export const routes: Routes = [
                    { path: 'course-vd-upload', component: CoursVdUpload},
                      { path: 'course-vd-list/:id', component: CouservedioListdemo},
                      { path: 'user_db', component: UserDashboard},
+                     { path: 'course-axis/:id', component: CourseAxis},
 ];

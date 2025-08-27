@@ -1,0 +1,27 @@
+<!-- <ng-container *ngIf="let head of vd_list">
+  <p>{{ head.heading }}</p>
+</ng-container> -->
+
+  <div class="page-container" *ngFor="let video of vd_list; let i = index">
+  <div class="video-section">
+    <video controls (loadedmetadata)="setDuration($event, i)">
+      <source [src]="dataService.imageUrl + video.videoPath" type="video/mp4">
+    </video>
+    <h2>{{ video.heading }}</h2>
+    <p>Duration: {{ video.duration || 'Loading...' }}</p>
+  </div>
+
+
+
+    <div class="content-section">
+      <h3>Course Overview</h3>
+      <p>
+      {{video.title}}
+      </p>
+      <ul>
+      
+        <li>Core concepts</li>
+        <li>Best practices</li>
+      </ul>
+    </div>
+  </div>
